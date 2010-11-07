@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mogade.WindowsPhone", "Mogade.WindowsPhone\Mogade.WindowsPhone.csproj", "{999C43AE-97C5-4FCE-B2F7-30B8CEA75557}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stuff", "stuff", "{798D894A-4396-4C68-8225-B4D698BCD2A1}"
+	ProjectSection(SolutionItems) = preProject
+		license.txt = license.txt
+		README.textile = README.textile
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
