@@ -1,0 +1,32 @@
+using System;
+
+namespace Mogade.WindowsPhone
+{
+   public interface IMogadeConfiguration
+   {
+      IMogadeConfiguration ConnectToTest();       
+   }
+
+   public class MogadeConfiguration : IMogadeConfiguration
+   {
+      private static readonly ConfigurationData _data = new ConfigurationData();
+      private static readonly MogadeConfiguration _configuration = new MogadeConfiguration();
+      private MogadeConfiguration() { }
+
+      public static IConfigurationData Data
+      {
+         get { return _data; }
+      }
+
+      public static void Configuration(Action<IMogadeConfiguration> action)
+      {
+         action(_configuration);
+      }
+
+      public IMogadeConfiguration ConnectToTest()
+      {
+         DriverConfiguration.Configuration(c => c.ConnectToTest());
+         return this;
+      }
+   }
+}
