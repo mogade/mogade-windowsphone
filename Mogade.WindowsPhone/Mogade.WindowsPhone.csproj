@@ -42,7 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mogade.WindowsPhone.Core">
-      <HintPath>E:\My Dropbox\emoh\Work\mogade-windowsphone\references\Mogade.WindowsPhone.Core.dll</HintPath>
+      <HintPath>..\references\Mogade.WindowsPhone.Core.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json.Silverlight">
       <HintPath>..\references\Newtonsoft.Json.Silverlight.dll</HintPath>
