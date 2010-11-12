@@ -3,12 +3,13 @@ using System.IO.IsolatedStorage;
 using System.Text;
 using Mogade.Configuration;
 using Newtonsoft.Json;
+using Microsoft.Phone.Info;  
 
 namespace Mogade.WindowsPhone
 {
    public class Storage : IStorage
-   {
-      private Configuration _configuration;
+   {      
+      private readonly Configuration _configuration;
 
       public Storage()
       {
@@ -32,6 +33,28 @@ namespace Mogade.WindowsPhone
 
       public string GetUniqueIdentifier()
       {
+         if (MogadeConfiguration.Data.UniqueIdStrategy == UniqueIdStrategy.DeviceId)
+         {
+            object raw;  
+            if (DeviceExtendedProperties.TryGetValue("DeviceUniqueId", out raw) && raw != null)
+            {
+               var bytes = (byte[]) raw;
+               var sb = new StringBuilder(bytes.Length * 2);
+               for(var i = 0; i < bytes.Length; ++i)
+               {
+                  sb.Append(bytes[i].ToString("X2"));
+               }
+               return sb.ToString();
+            }
+         }
+         else if (MogadeConfiguration.Data.UniqueIdStrategy == UniqueIdStrategy.UserId)
+         {
+            object anid;
+            if (UserExtendedProperties.TryGetValue("ANID", out anid) && anid != null)
+            {
+               return anid.ToString();
+            } 
+         }
          return _configuration.UniqueIdentifier;
       }
 

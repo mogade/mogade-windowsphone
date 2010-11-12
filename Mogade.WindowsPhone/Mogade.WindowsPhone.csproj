@@ -41,6 +41,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Phone" />
     <Reference Include="Mogade.WindowsPhone.Core">
       <HintPath>..\references\Mogade.WindowsPhone.Core.dll</HintPath>
     </Reference>
@@ -54,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\IConfigurationData.cs" />
+    <Compile Include="Components\UniqueIdStrategy.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="IMogadeClient.cs" />
     <Compile Include="Components\IMogadeConfiguration.cs" />
