@@ -54,6 +54,11 @@ Note that the methods which actually interact with the server will fire asynchro
 
 <pre>mogade.GetLeaderboard("leaderboardId", LeaderboardScope.Daily, page, leaderboard => { //do something with the leaderboard});</pre>
 
+h3. UserName Management
+
+Some of mogade's API calls require a username to be provided. In the case where your game doesn't  provide user management, this can be frustrating for users to have to retype. The library provides basic userName management - 
+stored locally, indepedent of the backend mogade service. You can simply use the @MogadeClient@ to @GetUserNames@, @SaveUserName@ and @RemoveUserName@.
+
 h3. API Overview
 
 Mogade is based around a _RESTish_ API, accepting and returning JSON messages.

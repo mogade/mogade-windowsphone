@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO.IsolatedStorage;
 using System.Text;
 using Mogade.Configuration;
@@ -8,16 +9,22 @@ using Microsoft.Phone.Info;
 namespace Mogade.WindowsPhone
 {
    public class Storage : IStorage
-   {      
+   {
+      private const string _mogadeDataFile = "mogade.dat";
+      private const string _userNamesDataFile = "usernames.dat";
+
       private readonly Configuration _configuration;
+      private IList<string> _userNames;
 
       public Storage()
       {
-         _configuration = ReadConfiguration();
+         _configuration = Read<Configuration>(_mogadeDataFile);
+
+         _userNames = Read<List<string>>(_userNamesDataFile) ?? new List<string>(1);
          if (_configuration == null)
          {
             _configuration = new Configuration {UniqueIdentifier = Guid.NewGuid().ToString()};
-            WriteConfiguration(_configuration);
+            WriteToFile(_configuration, _mogadeDataFile);
          }         
       }
 
@@ -61,27 +68,44 @@ namespace Mogade.WindowsPhone
       public void Save(GameConfiguration configuration)
       {
          _configuration.GameConfiguration = configuration;
-         WriteConfiguration(_configuration);
+         WriteToFile(_configuration, _mogadeDataFile);
       }
 
+      public ICollection<string> GetUserNames()
+      {
+         return _userNames;
+      }
 
-      private static Configuration ReadConfiguration()
+      public void SaveUserName(string userName)
+      {
+         if (string.IsNullOrEmpty(userName)) { return; }         
+         if ( _userNames.Contains(userName)) { return; }
+         _userNames.Add(userName);
+         WriteToFile(_userNames, _userNamesDataFile);
+      }
+
+      public void RemoveUserName(string userName)
+      {         
+         if (string.IsNullOrEmpty(userName) || !_userNames.Remove(userName)) { return; }
+         WriteToFile(_userNames, _userNamesDataFile);         
+      }
+      private static T Read<T>(string dataFile)
       {
          using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-         using (var stream = new IsolatedStorageFileStream("mogade.dat", System.IO.FileMode.OpenOrCreate, store))
+         using (var stream = new IsolatedStorageFileStream(dataFile, System.IO.FileMode.OpenOrCreate, store))
          {
-            if (stream.Length <= 0) { return null; }
+            if (stream.Length <= 0) { return default(T); }
             var buffer = new byte[stream.Length];
             stream.Read(buffer, 0, buffer.Length);
-            return JsonConvert.DeserializeObject<Configuration>(Encoding.UTF8.GetString(buffer, 0, buffer.Length));
+            return JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(buffer, 0, buffer.Length));
          }        
       }
-      private static void WriteConfiguration(Configuration configuration)
+      private static void WriteToFile(object objectToWrite, string dataFile)
       {
          using (var store = IsolatedStorageFile.GetUserStoreForApplication())         
-         using (var stream = new IsolatedStorageFileStream("mogade.dat", System.IO.FileMode.Create, store))
+         using (var stream = new IsolatedStorageFileStream(dataFile, System.IO.FileMode.Create, store))
          {
-            var buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(configuration));
+            var buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(objectToWrite));
             stream.Write(buffer, 0, buffer.Length);            
          }         
       }

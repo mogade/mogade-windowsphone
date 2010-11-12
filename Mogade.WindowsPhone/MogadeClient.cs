@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Mogade.Achievements;
 using Mogade.Configuration;
 using Mogade.Leaderboards;
@@ -77,6 +78,21 @@ namespace Mogade.WindowsPhone
       public string GetUniqueIdentifier()
       {
          return _storage.GetUniqueIdentifier();
+      }
+
+      public ICollection<string> GetUserNames()
+      {
+         return _storage.GetUserNames();
+      }
+
+      public void SaveUserName(string userName)
+      {
+         _storage.SaveUserName(userName);
+      }
+
+      public void RemoveUserName(string userName)
+      {
+         _storage.RemoveUserName(userName);
       }
 
       private void UpdateFromServer(Action<bool> callback)

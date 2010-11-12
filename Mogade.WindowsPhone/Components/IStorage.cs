@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Mogade.Configuration;
 
 namespace Mogade.WindowsPhone
@@ -7,7 +8,10 @@ namespace Mogade.WindowsPhone
       int? GetGameVersion();
       GameConfiguration LoadConfiguration();
       string GetUniqueIdentifier();
-
       void Save(GameConfiguration configuration);
+
+      ICollection<string> GetUserNames();
+      void SaveUserName(string userName);
+      void RemoveUserName(string userName);
    }
 }

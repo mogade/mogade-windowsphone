@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Mogade.Achievements;
 using Mogade.Configuration;
 using Mogade.Leaderboards;
@@ -78,5 +79,31 @@ namespace Mogade.WindowsPhone
       /// Returns mogade's unique identifier for this device
       /// </summary>      
       string GetUniqueIdentifier();
+
+      /// <summary>
+      /// Returns a list of previously saved usernames
+      /// </summary>
+      /// <remarks>
+      /// This method works using isolated storage only. It can be useful if you don't already do user management
+      /// but would like to present users with a convinient way to pick a name (from a list) when submitting a score
+      /// or achievement (rather than having to type it in each time)
+      /// </remarks>
+      ICollection<string> GetUserNames();
+
+      /// <summary>
+      /// Adds a user to the list of locally stored username names
+      /// </summary>
+      /// <remarks>
+      /// This will simply ignore duplicates
+      /// </remarks>
+      void SaveUserName(string userName);
+
+      /// <summary>
+      /// Adds a user to the list of locally stored username names
+      /// </summary>
+      /// <remarks>
+      /// This will simply ignore duplicates
+      /// </remarks>
+      void RemoveUserName(string userName);
    }
 }
