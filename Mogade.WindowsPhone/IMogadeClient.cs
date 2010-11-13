@@ -25,10 +25,21 @@ namespace Mogade.WindowsPhone
       /// </summary>            
       /// <returns>The user's settings</returns>
       /// <remarks>
-      /// The achievements collection is a list of achievement ids the user has earned      
+      /// The achievements collection is a list of achievement ids the user has earned
+      /// The leaderboards collection is a list of id=>points representing the user's top score for each leaderboard
+      /// 
+      /// In the case where a user hasn't completed an achievement, or earned a top score in a leaderboard
+      /// the entries will simply be missing.
+      /// 
+      /// This is meant to be mapped agains the GameConfiguration object (returned from GetGameConfiguration) which
+      /// returns user-agnostic game settings.
       /// </remarks>
       void GetUserSettings(string userName, Action<UserSettings> callback);
 
+      /// <summary>
+      /// Returns the game's configuration
+      /// </summary>                        
+      void GetGameConfiguration(Action<GameConfiguration> callback);
 
       /// <summary>
       /// Saves a score
@@ -56,7 +67,7 @@ namespace Mogade.WindowsPhone
       /// <remarks>
       /// Each page is limited to 10 scores
       /// </remarks>
-      void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, Action<Leaderboard> callback);
+      void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, Action<LeaderboardScores> callback);
 
       /// <summary>
       /// Grants the user the specified achievement

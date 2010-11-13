@@ -56,11 +56,11 @@ namespace Mogade.WindowsPhone
       }
 
       public void SaveScore(string leaderboardId, Score score, Action<Ranks> callback)
-      {
-         _driver.SaveScore(leaderboardId, score, callback);
+      {         
+         _driver.SaveScore(leaderboardId, score,  GetUniqueIdentifier(), callback);
       }
 
-      public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, Action<Leaderboard> callback)
+      public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, Action<LeaderboardScores> callback)
       {
          _driver.GetLeaderboard(leaderboardId, scope, page, callback);
       }
@@ -100,7 +100,7 @@ namespace Mogade.WindowsPhone
          _driver.GetGameConfiguration(g =>
          {
             _storage.Save(g);
-            callback(true);
+            if (callback != null) { callback(true); }
          });
       }
    }
