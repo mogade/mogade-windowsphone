@@ -95,6 +95,11 @@ namespace Mogade.WindowsPhone
          _storage.RemoveUserName(userName);
       }
 
+      public void LogError(string subject, string details)
+      {
+         _driver.LogError(subject, details);
+      }
+
       private void UpdateFromServer(Action<bool> callback)
       {
          _driver.GetGameConfiguration(g =>

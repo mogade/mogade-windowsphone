@@ -116,5 +116,12 @@ namespace Mogade.WindowsPhone
       /// This will simply ignore duplicates
       /// </remarks>
       void RemoveUserName(string userName);
+
+      /// <summary>
+      /// Logs an error
+      /// </summary>
+      /// <param name="subject">the subject of the error (a brief description)</param>
+      /// <param name="details">the error's details</param>
+      void LogError(string subject, string details);
    }
 }
