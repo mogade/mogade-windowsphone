@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using Mogade.Achievements;
 using Mogade.Configuration;
 using Mogade.Leaderboards;
@@ -8,6 +9,11 @@ namespace Mogade.WindowsPhone
 {
    public class MogadeClient : IMogadeClient
    {
+      static MogadeClient()
+      {
+         DriverConfiguration.Configuration(c => c.NetworkAvailableCheck(NetworkInterface.GetIsNetworkAvailable));
+      }
+
       private readonly IDriver _driver;
       private readonly IStorage _storage;
       
