@@ -18,7 +18,7 @@ namespace Mogade.WindowsPhone
       /// Updates the configuration if its changed
       /// </summary>
       /// <param name="callback">Will callback with true on success</param>
-      void Update(Action<bool> callback);
+      void Update(Action<Response<bool>> callback);
 
       /// <summary>
       /// Returns the user's stored settings for this game
@@ -34,12 +34,12 @@ namespace Mogade.WindowsPhone
       /// This is meant to be mapped agains the GameConfiguration object (returned from GetGameConfiguration) which
       /// returns user-agnostic game settings.
       /// </remarks>
-      void GetUserSettings(string userName, Action<UserSettings> callback);
+      void GetUserSettings(string userName, Action<Response<UserSettings>> callback);
 
       /// <summary>
       /// Returns the game's configuration
       /// </summary>                        
-      void GetGameConfiguration(Action<GameConfiguration> callback);
+      void GetGameConfiguration(Action<Response<GameConfiguration>> callback);
 
       /// <summary>
       /// Saves a score
@@ -55,7 +55,7 @@ namespace Mogade.WindowsPhone
       /// might mean the user got to level 4 and played for 12 minutes and 30 seconds. You are responsible for encoding/decoding
       /// this information...we just take it in, store it, and pass it back out      
       /// </remarks>
-      void SaveScore(string leaderboardId, Score score, Action<Ranks> callback);
+      void SaveScore(string leaderboardId, Score score, Action<Response<Ranks>> callback);
 
       /// <summary>
       /// Gets a leaderboard page
@@ -67,7 +67,7 @@ namespace Mogade.WindowsPhone
       /// <remarks>
       /// Each page is limited to 10 scores
       /// </remarks>
-      void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, Action<LeaderboardScores> callback);
+      void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, Action<Response<LeaderboardScores>> callback);
 
       /// <summary>
       /// Grants the user the specified achievement
@@ -75,7 +75,7 @@ namespace Mogade.WindowsPhone
       /// <param name="achievementId">The id of the achievement being granted</param>
       /// <param name="userName">The user's username</param>      
       /// <returns>The number of points earned</returns>
-      void GrantAchievement(string achievementId, string userName, Action<int> callback);
+      void GrantAchievement(string achievementId, string userName, Action<Response<int>> callback);
 
       /// <summary>
       /// Grants the user the specified achievement
@@ -84,7 +84,7 @@ namespace Mogade.WindowsPhone
       /// <param name="userName">The user's username</param>
       /// <param name="uniqueIdentifier">A unique identifier for the user. Mobile devices should use the deviceId.</param>
       /// <returns>The number of points earned</returns>
-      void GrantAchievement(Achievement achievement, string userName, Action<int> callback);
+      void GrantAchievement(Achievement achievement, string userName, Action<Response<int>> callback);
 
       /// <summary>
       /// Returns mogade's unique identifier for this device

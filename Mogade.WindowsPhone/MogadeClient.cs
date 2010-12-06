@@ -33,7 +33,7 @@ namespace Mogade.WindowsPhone
          get { return _driver; }
       }
 
-      public void Update(Action<bool> callback)
+      public void Update(Action<Response<bool>> callback)
       {
          var currentVersion = _storage.GetGameVersion();
          if (currentVersion == null)
@@ -44,39 +44,39 @@ namespace Mogade.WindowsPhone
 
          _driver.GetGameVersion(v =>
          {
-            if (v != currentVersion)
+            if (v.Data != currentVersion)
             {
                UpdateFromServer(callback);
             }
          });
       }
 
-      public void GetUserSettings(string userName, Action<UserSettings> callback)
+      public void GetUserSettings(string userName, Action<Response<UserSettings>> callback)
       {
          _driver.GetUserSettings(userName, GetUniqueIdentifier(), callback);
       }
 
-      public void GetGameConfiguration(Action<GameConfiguration> callback)
+      public void GetGameConfiguration(Action<Response<GameConfiguration>> callback)
       {
          _driver.GetGameConfiguration(callback);
       }
 
-      public void SaveScore(string leaderboardId, Score score, Action<Ranks> callback)
+      public void SaveScore(string leaderboardId, Score score, Action<Response<Ranks>> callback)
       {         
          _driver.SaveScore(leaderboardId, score,  GetUniqueIdentifier(), callback);
       }
 
-      public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, Action<LeaderboardScores> callback)
+      public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, Action<Response<LeaderboardScores>> callback)
       {
          _driver.GetLeaderboard(leaderboardId, scope, page, callback);
       }
 
-      public void GrantAchievement(string achievementId, string userName, Action<int> callback)
+      public void GrantAchievement(string achievementId, string userName, Action<Response<int>> callback)
       {
          _driver.GrantAchievement(achievementId, userName, GetUniqueIdentifier(), callback);
       }
 
-      public void GrantAchievement(Achievement achievement, string userName, Action<int> callback)
+      public void GrantAchievement(Achievement achievement, string userName, Action<Response<int>> callback)
       {
          _driver.GrantAchievement(achievement, userName, GetUniqueIdentifier(), callback);
       }
@@ -106,12 +106,17 @@ namespace Mogade.WindowsPhone
          _driver.LogError(subject, details);
       }
 
-      private void UpdateFromServer(Action<bool> callback)
+      private void UpdateFromServer(Action<Response<bool>> callback)
       {
          _driver.GetGameConfiguration(g =>
          {
-            _storage.Save(g);
-            if (callback != null) { callback(true); }
+            if (g.Success) { _storage.Save(g.Data); }
+            if (callback != null)
+            {
+               var response = Response<bool>.CreateSuccess(g.Success.ToString());
+               response.Data = g.Success;
+               callback(response);
+            }               
          });
       }
    }
