@@ -111,6 +111,12 @@ namespace Mogade.WindowsPhone
          _driver.LogError(subject, details);
       }
 
+      public void LogApplicationStart()
+      {
+         _driver.LogApplicationStart(GetUniqueIdentifier());
+      }
+
+
       private void UpdateFromServer(Action<Response<bool>> callback)
       {
          _driver.GetGameConfiguration(g =>

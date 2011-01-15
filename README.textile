@@ -39,7 +39,18 @@ The library should be straightforward to most .NET developers. The main entry po
 You instantiate @MogadeClient@ via the static @Initialize@ method, supplying your game key and game secret (available from the details view of your game on the mogade.com website):
 <pre>var mogade = MogadeClient.Initialize("myGameKey", "shhhMySecret");</pre>
 
-Once created you can use the various methods to interact with the mogade service. 
+Once created you can use the various methods to interact with the mogade service. As a general rule you'll want to execute the following at startup:
+
+<pre>
+   //configure
+   MogadeConfiguration.Configuration(c => c.UsingUniqueIdStrategy(UniqueIdStrategy.UserId));
+   //intialize (thread-safe, so keep one around)
+   var mogade = MogadeClient.Initialize("GAME_ID", "SECRET_KEY");         
+   //calll update
+   mogade.Update(null);
+   //log, assuming you are interesting in basic analytics
+   mogade.LogApplicationStart();
+</pre>
 
 Note that the methods which actually interact with the server will fire asynchronously (though its possible for many to fail quickly given invalid input):
 

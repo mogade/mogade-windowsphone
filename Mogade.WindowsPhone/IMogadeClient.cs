@@ -135,5 +135,10 @@ namespace Mogade.WindowsPhone
       /// <param name="subject">the subject of the error (a brief description)</param>
       /// <param name="details">the error's details</param>
       void LogError(string subject, string details);
+
+      /// <summary>
+      /// Logs that the appliction has started
+      /// </summary>      
+      void LogApplicationStart();
    }
 }
