@@ -66,6 +66,11 @@ namespace Mogade.WindowsPhone
          _driver.SaveScore(leaderboardId, score,  GetUniqueIdentifier(), callback);
       }
 
+      public void GetYesterdaysTopRank(string leaderboardId, string userName, Action<Response<int>> callback)
+      {
+         _driver.GetYesterdaysTopRank(leaderboardId, userName, GetUniqueIdentifier(), callback);
+      }
+
       public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, Action<Response<LeaderboardScores>> callback)
       {
          _driver.GetLeaderboard(leaderboardId, scope, page, callback);

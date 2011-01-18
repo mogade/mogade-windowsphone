@@ -37,7 +37,6 @@ h3. Usage
 The library should be straightforward to most .NET developers. The main entry point is the @MogadeClient@ class (which implements @IMogadeClient@ for you DI junkies).
 
 You instantiate @MogadeClient@ via the static @Initialize@ method, supplying your game key and game secret (available from the details view of your game on the mogade.com website):
-<pre>var mogade = MogadeClient.Initialize("myGameKey", "shhhMySecret");</pre>
 
 Once created you can use the various methods to interact with the mogade service. As a general rule you'll want to execute the following at startup:
 
