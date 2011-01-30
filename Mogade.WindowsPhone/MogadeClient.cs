@@ -81,12 +81,12 @@ namespace Mogade.WindowsPhone
          _driver.GetLeaderboard(leaderboardId, scope, page, userName, GetUniqueIdentifier(), callback);
       }
 
-      public void GrantAchievement(string achievementId, string userName, Action<Response<int>> callback)
+      public void GrantAchievement(string achievementId, string userName, Action<Response<Achievement>> callback)
       {
          _driver.GrantAchievement(achievementId, userName, GetUniqueIdentifier(), callback);
       }
 
-      public void GrantAchievement(Achievement achievement, string userName, Action<Response<int>> callback)
+      public void GrantAchievement(Achievement achievement, string userName, Action<Response<Achievement>> callback)
       {
          _driver.GrantAchievement(achievement, userName, GetUniqueIdentifier(), callback);
       }
