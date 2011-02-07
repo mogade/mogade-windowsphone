@@ -59,7 +59,7 @@ namespace Mogade.WindowsPhone
             object anid;
             if (UserExtendedProperties.TryGetValue("ANID", out anid) && anid != null)
             {
-               return anid.ToString();
+               return anid.ToString().Substring(2, 32);
             } 
          }
          return _configuration.UniqueIdentifier;
