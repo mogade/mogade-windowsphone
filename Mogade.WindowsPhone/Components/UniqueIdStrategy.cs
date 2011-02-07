@@ -1,5 +1,7 @@
 namespace Mogade.WindowsPhone
 {
+   using System;
+
    /// <remarks>
    /// Unlike the DeviceId, UserId changes when the device changes owner. Microsoft recommends using 
    /// this value, but for all intents and purposes, mogade should work fine with either UserId or 
@@ -32,6 +34,17 @@ namespace Mogade.WindowsPhone
       /// This approach requires that developers request the ID_CAP_IDENTITY_USER capability
       /// in their Manifest.      
       /// </remarks>
+      [Obsolete("User UserId2 instead")]
       UserId,
+
+
+      /// <summary>
+      /// Uses the user's windows live *anonymous* id
+      /// </summary>
+      /// <remarks>
+      /// This approach requires that developers request the ID_CAP_IDENTITY_USER capability
+      /// in their Manifest.      
+      /// </remarks>
+      UserId2,
    }
 }
