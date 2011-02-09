@@ -7,7 +7,7 @@ namespace Mogade.WindowsPhone
 
    public class ConfigurationData : IConfigurationData
    {
-      private UniqueIdStrategy _uniqueIdStrategy = UniqueIdStrategy.UserId;
+      private UniqueIdStrategy _uniqueIdStrategy = UniqueIdStrategy.UserId2;
 
       public UniqueIdStrategy UniqueIdStrategy
       {
