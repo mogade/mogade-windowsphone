@@ -112,6 +112,13 @@ namespace Mogade.WindowsPhone
       void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, int records, string userName, Action<Response<LeaderboardScoresWithUser>> callback);
 
       /// <summary>
+      /// Gets the top 3 scores from yesterday
+      /// </summary>
+      /// <param name="leaderboardId">The id of the leaderboard to get the scores from</param>
+      /// <returns>A leaderboard object containing an array of scores</returns
+      void GetYesterdaysLeaders(string leaderboardId, Action<Response<LeaderboardScores>> callback);
+
+      /// <summary>
       /// Grants the user the specified achievement
       /// </summary>
       /// <param name="achievementId">The id of the achievement being granted</param>
