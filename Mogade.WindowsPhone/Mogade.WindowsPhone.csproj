@@ -45,8 +45,8 @@
     <Reference Include="Mogade.WindowsPhone.Core">
       <HintPath>..\references\Mogade.WindowsPhone.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json.Silverlight">
-      <HintPath>..\references\Newtonsoft.Json.Silverlight.dll</HintPath>
+    <Reference Include="Newtonsoft.Json.WindowsPhone">
+      <HintPath>..\references\Newtonsoft.Json.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
