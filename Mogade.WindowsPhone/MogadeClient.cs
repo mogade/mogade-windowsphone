@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
-using Mogade.Achievements;
-using Mogade.Configuration;
-using Mogade.Leaderboards;
 
 namespace Mogade.WindowsPhone
 {
@@ -33,52 +30,14 @@ namespace Mogade.WindowsPhone
          get { return _driver; }
       }
 
-      public void Update(Action<Response<bool>> callback)
+      public string ApiVersion
       {
-         var currentVersion = _storage.GetGameVersion();
-         if (currentVersion == null)
-         {
-            UpdateFromServer(callback);
-            return;
-         }
-
-         _driver.GetGameVersion(v =>
-         {
-            if (v.Data != currentVersion)
-            {
-               UpdateFromServer(callback);
-            }
-         });
-      }
-
-      public void GetUserSettings(string userName, Action<Response<UserSettings>> callback)
-      {
-         _driver.GetUserSettings(userName, GetUniqueIdentifier(), callback);
-      }
-
-      public void GetGameConfiguration(Action<Response<GameConfiguration>> callback)
-      {
-         _driver.GetGameConfiguration(callback);
+         get { return _driver.ApiVersion; }
       }
 
       public void SaveScore(string leaderboardId, Score score, Action<Response<Ranks>> callback)
-      {         
-         _driver.SaveScore(leaderboardId, score,  GetUniqueIdentifier(), callback);
-      }
-
-      public void GetYesterdaysTopRank(string leaderboardId, string userName, Action<Response<int>> callback)
       {
-         _driver.GetYesterdaysTopRank(leaderboardId, userName, GetUniqueIdentifier(), callback);
-      }
-
-      public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, Action<Response<LeaderboardScores>> callback)
-      {
-         _driver.GetLeaderboard(leaderboardId, scope, page, callback);
-      }
-
-      public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, string userName, Action<Response<LeaderboardScoresWithUser>> callback)
-      {
-         _driver.GetLeaderboard(leaderboardId, scope, page, userName, GetUniqueIdentifier(), callback);
+         _driver.SaveScore(leaderboardId, score, GetUniqueIdentifier(), callback);
       }
 
       public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, int records, Action<Response<LeaderboardScores>> callback)
@@ -86,24 +45,44 @@ namespace Mogade.WindowsPhone
          _driver.GetLeaderboard(leaderboardId, scope, page, records, callback);
       }
 
-      public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, int records, string userName, Action<Response<LeaderboardScoresWithUser>> callback)
+      public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, string userName, int records, Action<Response<LeaderboardScores>> callback)
       {
-         _driver.GetLeaderboard(leaderboardId, scope, page, records, userName, GetUniqueIdentifier(), callback);
+         _driver.GetLeaderboard(leaderboardId, scope, userName, GetUniqueIdentifier(), records, callback);
       }
 
-      public void GetYesterdaysLeaders(string leaderboardId, Action<Response<LeaderboardScores>> callback)
+      public void GetRanks(string leaderboardId, string userName, Action<Response<Ranks>> callback)
       {
-         _driver.GetYesterdaysLeaders(leaderboardId, callback);
+         _driver.GetRanks(leaderboardId, userName, GetUniqueIdentifier(), callback);
       }
 
-      public void GrantAchievement(string achievementId, string userName, Action<Response<Achievement>> callback)
+      public void GetRank(string leaderboardId, string userName, LeaderboardScope scope, Action<Response<int>> callback)
       {
-         _driver.GrantAchievement(achievementId, userName, GetUniqueIdentifier(), callback);
+         _driver.GetRank(leaderboardId, userName, GetUniqueIdentifier(), scope, callback);
       }
 
-      public void GrantAchievement(Achievement achievement, string userName, Action<Response<Achievement>> callback)
+      public void GetRanks(string leaderboardId, string userName, LeaderboardScope[] scopes, Action<Response<Ranks>> callback)
       {
-         _driver.GrantAchievement(achievement, userName, GetUniqueIdentifier(), callback);
+         _driver.GetRanks(leaderboardId, userName, GetUniqueIdentifier(), scopes, callback);
+      }
+
+      public void GetEarnedAchievements(string userName, Action<Response<ICollection<string>>> callback)
+      {
+         _driver.GetEarnedAchievements(userName, GetUniqueIdentifier(), callback);
+      }
+
+      public void AchievementEarned(string achievementId, string userName, Action<Response<Achievement>> callback)
+      {
+         _driver.AchievementEarned(achievementId, userName, GetUniqueIdentifier(), callback);
+      }
+
+      public void LogApplicationStart()
+      {
+         _driver.LogApplicationStart(GetUniqueIdentifier(), null);
+      }
+
+      public void LogError(string subject, string details)
+      {
+         _driver.LogError(subject, details, null);
       }
 
       public string GetUniqueIdentifier()
@@ -124,31 +103,6 @@ namespace Mogade.WindowsPhone
       public void RemoveUserName(string userName)
       {
          _storage.RemoveUserName(userName);
-      }
-
-      public void LogError(string subject, string details)
-      {
-         _driver.LogError(subject, details);
-      }
-
-      public void LogApplicationStart()
-      {
-         _driver.LogApplicationStart(GetUniqueIdentifier());
-      }
-
-
-      private void UpdateFromServer(Action<Response<bool>> callback)
-      {
-         _driver.GetGameConfiguration(g =>
-         {
-            if (g.Success) { _storage.Save(g.Data); }
-            if (callback != null)
-            {
-               var response = Response<bool>.CreateSuccess(g.Success.ToString());
-               response.Data = g.Success;
-               callback(response);
-            }               
-         });
       }
    }
 }

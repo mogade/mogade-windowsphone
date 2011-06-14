@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
 using System.Text;
-using Mogade.Configuration;
 using Newtonsoft.Json;
-using Microsoft.Phone.Info;  
+using Microsoft.Phone.Info;
 
 namespace Mogade.WindowsPhone
 {
@@ -14,28 +13,17 @@ namespace Mogade.WindowsPhone
       private const string _userNamesDataFile = "usernames.dat";
 
       private readonly Configuration _configuration;
-      private IList<string> _userNames;
+      private readonly IList<string> _userNames;
 
       public Storage()
       {
-         _configuration = Read<Configuration>(_mogadeDataFile);
-
          _userNames = Read<List<string>>(_userNamesDataFile) ?? new List<string>(1);
+         _configuration = Read<Configuration>(_mogadeDataFile);
          if (_configuration == null)
          {
-            _configuration = new Configuration {UniqueIdentifier = Guid.NewGuid().ToString()};
+            _configuration = new Configuration { UniqueIdentifier = Guid.NewGuid().ToString() };
             WriteToFile(_configuration, _mogadeDataFile);
-         }         
-      }
-
-      public int? GetGameVersion()
-      {
-         return _configuration.GameConfiguration == null ? null : (int?)_configuration.GameConfiguration.Version;
-      }
-
-      public GameConfiguration LoadConfiguration()
-      {
-         return _configuration.GameConfiguration;
+         }  
       }
 
       public string GetUniqueIdentifier()
@@ -54,7 +42,7 @@ namespace Mogade.WindowsPhone
                return sb.ToString();
             }
          }
-         else if (MogadeConfiguration.Data.UniqueIdStrategy == UniqueIdStrategy.UserId)
+         else if (MogadeConfiguration.Data.UniqueIdStrategy == UniqueIdStrategy.LegacyUserId)
          {
             object anid;
             if (UserExtendedProperties.TryGetValue("ANID", out anid) && anid != null)
@@ -62,7 +50,7 @@ namespace Mogade.WindowsPhone
                return anid.ToString();
             }
          }
-         else if (MogadeConfiguration.Data.UniqueIdStrategy == UniqueIdStrategy.UserId2)
+         else if (MogadeConfiguration.Data.UniqueIdStrategy == UniqueIdStrategy.UserId)
          {
             object anid;
             if (UserExtendedProperties.TryGetValue("ANID", out anid) && anid != null)
@@ -73,12 +61,6 @@ namespace Mogade.WindowsPhone
          return _configuration.UniqueIdentifier;
       }
 
-      public void Save(GameConfiguration configuration)
-      {
-         _configuration.GameConfiguration = configuration;
-         WriteToFile(_configuration, _mogadeDataFile);
-      }
-
       public ICollection<string> GetUserNames()
       {
          return _userNames;
@@ -86,16 +68,16 @@ namespace Mogade.WindowsPhone
 
       public void SaveUserName(string userName)
       {
-         if (string.IsNullOrEmpty(userName)) { return; }         
+         if (string.IsNullOrEmpty(userName)) { return; }
          if ( _userNames.Contains(userName)) { return; }
          _userNames.Add(userName);
          WriteToFile(_userNames, _userNamesDataFile);
       }
 
       public void RemoveUserName(string userName)
-      {         
+      {
          if (string.IsNullOrEmpty(userName) || !_userNames.Remove(userName)) { return; }
-         WriteToFile(_userNames, _userNamesDataFile);         
+         WriteToFile(_userNames, _userNamesDataFile);
       }
       private static T Read<T>(string dataFile)
       {
@@ -110,12 +92,12 @@ namespace Mogade.WindowsPhone
       }
       private static void WriteToFile(object objectToWrite, string dataFile)
       {
-         using (var store = IsolatedStorageFile.GetUserStoreForApplication())         
+         using (var store = IsolatedStorageFile.GetUserStoreForApplication())
          using (var stream = new IsolatedStorageFileStream(dataFile, System.IO.FileMode.Create, store))
          {
             var buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(objectToWrite));
-            stream.Write(buffer, 0, buffer.Length);            
-         }         
+            stream.Write(buffer, 0, buffer.Length);
+         }
       }
    }
 }

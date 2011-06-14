@@ -5,6 +5,7 @@ namespace Mogade.WindowsPhone
    public interface IMogadeConfiguration
    {
       IMogadeConfiguration ConnectToTest();
+      IMogadeConfiguration ConnectTo(string url);
       IMogadeConfiguration UsingUniqueIdStrategy(UniqueIdStrategy strategyToUse);
    }
 
@@ -30,10 +31,16 @@ namespace Mogade.WindowsPhone
          return this;
       }
 
+      public IMogadeConfiguration ConnectTo(string url)
+      {
+         DriverConfiguration.Configuration(c => c.ConnectTo(url));
+         return this;
+      }
+
       public IMogadeConfiguration UsingUniqueIdStrategy(UniqueIdStrategy strategyToUse)
       {
          _data.UniqueIdStrategy = strategyToUse;
          return this;
-      }      
+      }
    }
 }

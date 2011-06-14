@@ -35,7 +35,7 @@ namespace Mogade.WindowsPhone
       /// in their Manifest.      
       /// </remarks>
       [Obsolete("User UserId2 instead")]
-      UserId,
+      LegacyUserId,
 
 
       /// <summary>
@@ -43,8 +43,8 @@ namespace Mogade.WindowsPhone
       /// </summary>
       /// <remarks>
       /// This approach requires that developers request the ID_CAP_IDENTITY_USER capability
-      /// in their Manifest.      
+      /// in their Manifest
       /// </remarks>
-      UserId2,
+      UserId,
    }
 }
