@@ -34,6 +34,15 @@ namespace Mogade.WindowsPhone
 
 
       /// <summary>
+      /// Gets a leaderboard page with a 10 records
+      /// </summary>
+      /// <param name="leaderboardId">The id of the leaderboard to get the scores from</param>
+      /// <param name="scope">The scope to get the scores from (daily, weekly or overall)</param>
+      /// <param name="page">The page to get (starting with 1)</param>
+      /// <returns>A leaderboard object containing an array of scores</returns>
+      void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page,  Action<Response<LeaderboardScores>> callback);
+
+      /// <summary>
       /// Gets a leaderboard page with a specific number of records
       /// </summary>
       /// <param name="leaderboardId">The id of the leaderboard to get the scores from</param>
@@ -42,6 +51,18 @@ namespace Mogade.WindowsPhone
       /// <param name="records">The number of records (up to 50)</param>
       /// <returns>A leaderboard object containing an array of scores</returns>
       void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, int records, Action<Response<LeaderboardScores>> callback);
+
+      /// <summary>
+      /// Gets a leaderboard located around the user's page with 10 records
+      /// </summary>
+      /// <param name="leaderboardId">The id of the leaderboard to get the scores from</param>
+      /// <param name="scope">The scope to get the scores from (daily, weekly or overall)</param>
+      /// <param name="userName">the name of the user</param>
+      /// <returns>A leaderboard object containing an array of scores</returns>
+      /// <remarks>
+      /// Will return up to 10 records. The user's score object will only be returned when page = 1 and, of course, if the user has a score
+      /// </remarks>
+      void GetLeaderboard(string leaderboardId, LeaderboardScope scope, string userName, Action<Response<LeaderboardScores>> callback);
 
       /// <summary>
       /// Gets a leaderboard located around the user's page

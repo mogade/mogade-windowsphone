@@ -40,9 +40,19 @@ namespace Mogade.WindowsPhone
          _driver.SaveScore(leaderboardId, score, GetUniqueIdentifier(), callback);
       }
 
+      public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, Action<Response<LeaderboardScores>> callback)
+      {
+         _driver.GetLeaderboard(leaderboardId, scope, page, 10, callback);
+      }
+
       public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, int records, Action<Response<LeaderboardScores>> callback)
       {
          _driver.GetLeaderboard(leaderboardId, scope, page, records, callback);
+      }
+
+      public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, string userName, Action<Response<LeaderboardScores>> callback)
+      {
+         _driver.GetLeaderboard(leaderboardId, scope, userName, GetUniqueIdentifier(), 10, callback);
       }
 
       public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, string userName, int records, Action<Response<LeaderboardScores>> callback)
