@@ -35,7 +35,7 @@ namespace Mogade.WindowsPhone
          get { return _driver.ApiVersion; }
       }
 
-      public void SaveScore(string leaderboardId, Score score, Action<Response<Ranks>> callback)
+      public void SaveScore(string leaderboardId, Score score, Action<Response<SavedScore>> callback)
       {
          _driver.SaveScore(leaderboardId, score, GetUniqueIdentifier(), callback);
       }

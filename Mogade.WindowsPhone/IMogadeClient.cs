@@ -30,7 +30,7 @@ namespace Mogade.WindowsPhone
       /// might mean the user got to level 4 and played for 12 minutes and 30 seconds. You are responsible for encoding/decoding
       /// this information...we just take it in, store it, and pass it back out
       /// </remarks>
-      void SaveScore(string leaderboardId, Score score, Action<Response<Ranks>> callback);
+      void SaveScore(string leaderboardId, Score score, Action<Response<SavedScore>> callback);
 
 
       /// <summary>
