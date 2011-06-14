@@ -6,7 +6,9 @@ This is the official Windows Phone library. The library wraps the "core .NET dri
 
 h2. Important Notice For Developers Upgrading form V1
 
-If you are upgrading from version 1 and you were either using the @UserId@ UniqueIdStrategy *or you were using the default strategy (ie, not specifying anything)*, you *must* configure the client to use the @LegacyUserId@ strategy. You do this by calling the following on startup @MogadeConfiguration.Configuration(c => c.UsingUniqueIdStrategy(UniqueIdStrategy.LegacyUserId));@
+If you are upgrading from version 1 and you were either using the @UserId@ UniqueIdStrategy *or you were using the default strategy (ie, not specifying anything)*, you *must* configure the client to use the @LegacyUserId@ strategy. You do this by calling the following on startup
+
+<pre>MogadeConfiguration.Configuration(c => c.UsingUniqueIdStrategy(UniqueIdStrategy.LegacyUserId));</pre>
 
 h3. Other Libraries
 
