@@ -1,14 +1,14 @@
+h1. Important Notice For Developers Upgrading form V1
+
+If you are upgrading from version 1 and you were either using the @UserId@ UniqueIdStrategy *or you were using the default strategy (ie, not specifying anything)*, you *must* configure the client to use the @LegacyUserId@ strategy. You do this by calling the following on startup
+
+<pre>MogadeConfiguration.Configuration(c => c.UsingUniqueIdStrategy(UniqueIdStrategy.LegacyUserId));</pre>
+
 h2. Mogade For Windows Phone
 
 Mogade is a free service web-based service which allows game developers to quickly enchance their games with auxiliary functionality (such as leaderboards).
 
 This is the official Windows Phone library. The library wraps the "core .NET driver":https://github.com/mogade/mogade-csharp. It is currently a very thin wrapper, but we do plan on adding features.
-
-h2. Important Notice For Developers Upgrading form V1
-
-If you are upgrading from version 1 and you were either using the @UserId@ UniqueIdStrategy *or you were using the default strategy (ie, not specifying anything)*, you *must* configure the client to use the @LegacyUserId@ strategy. You do this by calling the following on startup
-
-<pre>MogadeConfiguration.Configuration(c => c.UsingUniqueIdStrategy(UniqueIdStrategy.LegacyUserId));</pre>
 
 h3. Other Libraries
 
