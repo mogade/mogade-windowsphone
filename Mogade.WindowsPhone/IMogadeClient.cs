@@ -59,10 +59,7 @@ namespace Mogade.WindowsPhone
       /// <param name="scope">The scope to get the scores from (daily, weekly or overall)</param>
       /// <param name="userName">the name of the user</param>
       /// <returns>A leaderboard object containing an array of scores</returns>
-      /// <remarks>
-      /// Will return up to 10 records. The user's score object will only be returned when page = 1 and, of course, if the user has a score
-      /// </remarks>
-      void GetLeaderboard(string leaderboardId, LeaderboardScope scope, string userName, Action<Response<LeaderboardScores>> callback);
+      void GetLeaderboard(string leaderboardId, LeaderboardScope scope, string userName, Action<Response<Score>> callback);
 
       /// <summary>
       /// Gets a leaderboard located around the user's page
