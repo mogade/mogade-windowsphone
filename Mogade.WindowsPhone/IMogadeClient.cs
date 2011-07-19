@@ -101,6 +101,32 @@ namespace Mogade.WindowsPhone
       void GetRanks(string leaderboardId, string userName, LeaderboardScope[] scopes, Action<Response<Ranks>> callback);
 
       /// <summary>
+      /// Gets the rank for a score across all scopes
+      /// </summary>
+      /// <param name="leaderboardId">The id of the leaderboard to get the scores from</param>
+      /// <param name="score">The score to get the rank of</param>
+      /// <returns>Returns a rank object (0 means the user doesn't have a rank for the specified scope)</returns>
+      void GetRanks(string leaderboardId, int score, Action<Response<Ranks>> callback);
+
+      /// <summary>
+      /// Gets the rank for a score across an individual scope
+      /// </summary>
+      /// <param name="leaderboardId">The id of the leaderboard to get the scores from</param>
+      /// <param name="score">The score to get the rank of</param>
+      /// <param name="scope">The scope to get the rank for</param>
+      /// <returns>Returns the user's rank (0 means the user doesn't have a rank for the specified scope)</returns>
+      void GetRank(string leaderboardId, int score, LeaderboardScope scope, Action<Response<int>> callback);
+
+      /// <summary>
+      /// Gets the rank for a score acrossspecified scopes
+      /// </summary>
+      /// <param name="leaderboardId">The id of the leaderboard to get the scores from</param>
+      /// <param name="score">The score to get the rank of</param>
+      /// <param name="scopes">The scopes to get the rank for</param>
+      /// <returns>Returns the user's rank (0 means the user doesn't have a rank for the specified scope, or that the scope wasn't requested)</returns>
+      void GetRanks(string leaderboardId, int score, LeaderboardScope[] scopes, Action<Response<Ranks>> callback);
+
+      /// <summary>
       /// Gets the achievement ids that the player has earned
       /// </summary>
       /// <param name="userName">the name of the user</param>
