@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>mogade-windowsphone</id>
-    <version>0.1</version>
+    <version>0.3</version>
     <authors>Karl Seguin</authors>
     <owners>Karl Seguin</owners>
     <projectUrl>http://mogade.com</projectUrl>
@@ -11,10 +11,10 @@
     <description>Windows Phone Platform Driver for Mogade</description>
     <tags>mogade game library leaderboard achievments wp7 windowsphone phone</tags>
 	  <dependencies>
-		<dependency id="mogade-csharp" version="0.1" />
+		<dependency id="mogade-csharp" version="0.3" />
 	  </dependencies>
   </metadata>
   <files>
-	<file src="Mogade.WindowsPhone\bin\Release\Mogade.WindowsPhone.dll" target="lib"/>
+	<file src="..\Mogade.WindowsPhone\bin\Release\Mogade.WindowsPhone.dll" target="lib"/>
   </files>
 </package>
