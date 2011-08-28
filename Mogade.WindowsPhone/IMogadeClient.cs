@@ -75,6 +75,17 @@ namespace Mogade.WindowsPhone
       void GetLeaderboard(string leaderboardId, LeaderboardScope scope, string userName,int records, Action<Response<LeaderboardScores>> callback);
 
       /// <summary>
+      /// Gets the number of scores in a leaderboard
+      /// </summary>
+      /// <param name="leaderboardId">The id of the leaderboard to get the scores from</param>
+      /// <param name="scope">The scope to get the scores from (daily, weekly or overall)</param>
+      /// <returns>the number of scores</returns>
+      /// <remarks>
+      /// the number of scores is limited to 25 000
+      /// </remarks>
+      void GetLeaderboardCount(string leaderboardId, LeaderboardScope scope, Action<Response<int>> callback);
+
+      /// <summary>
       /// Gets a a user's rank across all scopes
       /// </summary>
       /// <param name="leaderboardId">The id of the leaderboard to get the scores from</param>
@@ -152,6 +163,11 @@ namespace Mogade.WindowsPhone
       /// <param name="subject">the subject of the error (a brief description)</param>
       /// <param name="details">the error's details</param>
       void LogError(string subject, string details);
+
+      /// <summary>
+      /// Geta s game's assets
+      /// </summary>
+      void GetAssets(Action<Response<IList<Asset>>> callback);
 
       /// <summary>
       /// Gets the unique identifier mogade is using for this device/user

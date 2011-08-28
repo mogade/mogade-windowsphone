@@ -60,6 +60,11 @@ namespace Mogade.WindowsPhone
          _driver.GetLeaderboard(leaderboardId, scope, userName, GetUniqueIdentifier(), records, callback);
       }
 
+      public void GetLeaderboardCount(string leaderboardId, LeaderboardScope scope, Action<Response<int>> callback)
+      {
+         _driver.GetLeaderboardCount(leaderboardId, scope, callback);
+      }
+
       public void GetRanks(string leaderboardId, string userName, Action<Response<Ranks>> callback)
       {
          _driver.GetRanks(leaderboardId, userName, GetUniqueIdentifier(), callback);
@@ -108,6 +113,11 @@ namespace Mogade.WindowsPhone
       public void LogError(string subject, string details)
       {
          _driver.LogError(subject, details, null);
+      }
+
+      public void GetAssets(Action<Response<IList<Asset>>> callback)
+      {
+         _driver.GetAssets(callback);
       }
 
       public string GetUniqueIdentifier()
