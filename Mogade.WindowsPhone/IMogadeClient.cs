@@ -147,6 +147,11 @@ namespace Mogade.WindowsPhone
       void GetRanks(string leaderboardId, int score, LeaderboardScope[] scopes, Action<Response<Ranks>> callback);
 
       /// <summary>
+      /// Gets the game's achievements
+      /// </summary>
+      void GetAchievements(Action<Response<ICollection<Achievement>>> callback);
+
+      /// <summary>
       /// Gets the achievement ids that the player has earned
       /// </summary>
       /// <param name="userName">the name of the user</param>

@@ -100,6 +100,11 @@ namespace Mogade.WindowsPhone
          _driver.GetRanks(leaderboardId, score, scopes, callback);
       }
 
+      public void GetAchievements(Action<Response<ICollection<Achievement>>> callback)
+      {
+         _driver.GetAchievements(callback);
+      }
+
       public void GetEarnedAchievements(string userName, Action<Response<ICollection<string>>> callback)
       {
          _driver.GetEarnedAchievements(userName, GetUniqueIdentifier(), callback);
