@@ -53,13 +53,24 @@ namespace Mogade.WindowsPhone
       void GetLeaderboard(string leaderboardId, LeaderboardScope scope, int page, int records, Action<Response<LeaderboardScores>> callback);
 
       /// <summary>
-      /// Gets a leaderboard located around the user's page with 10 records
+      /// Gets a leaderboard page with a specific number of records and the player's stats
+      /// </summary>
+      /// <param name="leaderboardId">The id of the leaderboard to get the scores from</param>
+      /// <param name="scope">The scope to get the scores from (daily, weekly or overall)</param>
+      /// <param name="userName">the name of the user</param>
+      /// <param name="page">The page to get (starting with 1)</param>
+      /// <param name="records">The number of records (up to 50)</param>
+      /// <returns>A leaderboard object containing an array of scores</returns>
+      void GetLeaderboardWithPlayerStats(string leaderboardId, LeaderboardScope scope, string userName,  int page, int records, Action<Response<LeaderboardScoresWithPlayerStats>> callback);
+
+      /// <summary>
+      /// Gets a player's score
       /// </summary>
       /// <param name="leaderboardId">The id of the leaderboard to get the scores from</param>
       /// <param name="scope">The scope to get the scores from (daily, weekly or overall)</param>
       /// <param name="userName">the name of the user</param>
       /// <returns>A leaderboard object containing an array of scores</returns>
-      void GetLeaderboard(string leaderboardId, LeaderboardScope scope, string userName, Action<Response<Score>> callback);
+      void GetPlayerScore(string leaderboardId, LeaderboardScope scope, string userName, Action<Response<Score>> callback);
 
       /// <summary>
       /// Gets a leaderboard located around the user's page

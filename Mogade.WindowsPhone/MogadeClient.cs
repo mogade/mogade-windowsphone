@@ -50,7 +50,12 @@ namespace Mogade.WindowsPhone
          _driver.GetLeaderboard(leaderboardId, scope, page, records, callback);
       }
 
-      public void GetLeaderboard(string leaderboardId, LeaderboardScope scope, string userName, Action<Response<Score>> callback)
+      public void GetLeaderboardWithPlayerStats(string leaderboardId, LeaderboardScope scope, string userName, int page, int records, Action<Response<LeaderboardScoresWithPlayerStats>> callback)
+      {
+         _driver.GetLeaderboardWithPlayerStats(leaderboardId, scope, userName, GetUniqueIdentifier(), page, records, callback);
+      }
+
+      public void GetPlayerScore(string leaderboardId, LeaderboardScope scope, string userName, Action<Response<Score>> callback)
       {
          _driver.GetLeaderboard(leaderboardId, scope, userName, GetUniqueIdentifier(), callback);
       }
