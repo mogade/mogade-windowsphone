@@ -125,6 +125,11 @@ namespace Mogade.WindowsPhone
          _driver.LogApplicationStart(GetUniqueIdentifier(), null);
       }
 
+      public void LogCustomStat(int index)
+      {
+         _driver.LogCustomStat(index, null);
+      }
+
       public void LogError(string subject, string details)
       {
          _driver.LogError(subject, details, null);
