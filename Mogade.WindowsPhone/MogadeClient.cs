@@ -140,6 +140,11 @@ namespace Mogade.WindowsPhone
          _driver.GetAssets(callback);
       }
 
+      public void Rename(string currentUserName, string newUserName, Action<Response<bool>> callback)
+      {
+         _driver.Rename(GetUniqueIdentifier(), currentUserName, newUserName, callback);
+      }
+
       public string GetUniqueIdentifier()
       {
          return _storage.GetUniqueIdentifier();

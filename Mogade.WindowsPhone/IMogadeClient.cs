@@ -201,6 +201,11 @@ namespace Mogade.WindowsPhone
       void GetAssets(Action<Response<IList<Asset>>> callback);
 
       /// <summary>
+      /// renames a user
+      /// </summary>
+      void Rename(string currentUserName, string newUserName, Action<Response<bool>> callback);
+
+      /// <summary>
       /// Gets the unique identifier mogade is using for this device/user
       /// </summary>
       string GetUniqueIdentifier();
